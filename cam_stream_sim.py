@@ -10,7 +10,7 @@ Usage:
     python cam_stream_sim.py --cameras 5000 --burst-cameras 200 --duration 300 --plot
     python cam_stream_sim.py --cameras 1000 --burst-cameras 50 --nic 40 --duration 300 --plot
 
-Recovered from kimi_web_output.txt (Kimi chat transcript) and updated:
+Recovered from description_output.txt (transcript) and updated:
   - Output paths are portable (local ./output, auto-created) instead of the
     sandbox-only /mnt/agents/output/.
   - The --burst-recovery CLI flag is now wired to the existing
