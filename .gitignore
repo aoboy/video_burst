@@ -11,3 +11,6 @@ __pycache__/
 .vscode/
 *.swp
 .DS_Store
+
+# Local-only files (kept out of version control)
+kimi_web_output.txt
