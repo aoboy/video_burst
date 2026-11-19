@@ -1,0 +1,60 @@
+# makefile.sim -- convenience wrapper around CMake.
+#
+# The canonical build is driven by CMake (see CMakeLists.txt). This Makefile
+# just wraps the common commands so you can do:
+#
+#     make -f makefile.sim build        # configure + build (Release)
+#     make -f makefile.sim run          # run the default 5000-stream sim
+#     make -f makefile.sim test         # unit tests + python CLI tests
+#     make -f makefile.sim compare      # cross-validate against cam_stream_sim.py
+#     make -f makefile.sim clean
+
+BUILD   ?= build
+CONFIG  ?= Release
+JOBS    ?=
+
+CMAKE   := cmake
+PYTHON  ?= python3
+
+BSTYLE  := -f makefile.sim
+
+.PHONY: help build all unit run pytests test compare model plot clean
+
+help:
+	@echo "Targets (pass -f makefile.sim):"
+	@echo "  build     configure + compile the simulator (Release)"
+	@echo "  unit      run the C++ unit test binary"
+	@echo "  pytests   run python tests against the built binary"
+	@echo "  test      unit + python tests"
+	@echo "  run       build and run the default simulation"
+	@echo "  model     print the analytical model report"
+	@echo "  compare   cross-validate C++ vs cam_stream_sim.py"
+	@echo "  plot      regenerate plots from the latest CSV output"
+	@echo "  clean     remove the build tree"
+
+build:
+	$(CMAKE) -S . -B $(BUILD) -DCMAKE_BUILD_TYPE=$(CONFIG)
+	$(CMAKE) --build $(BUILD) $(if $(JOBS),--parallel $(JOBS),--parallel)
+
+unit: build
+	$(BUILD)/bsim_tests
+
+pytests: build
+	$(PYTHON) python/test_cpp_sim.py
+
+test: unit pytests
+
+run: build
+	$(BUILD)/bsim $(ARGS)
+
+model: build
+	$(BUILD)/bsim --model
+
+compare: build
+	$(PYTHON) python/compare_with_python.py
+
+plot: build
+	$(PYTHON) python/plot_results.py
+
+clean:
+	rm -rf $(BUILD)
