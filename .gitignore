@@ -1,0 +1,13 @@
+# Build artifacts
+sim_cpp/build/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Editors / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
