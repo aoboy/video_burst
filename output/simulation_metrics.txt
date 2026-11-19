@@ -1,0 +1,25 @@
+Camera Stream Burst Simulation - Metrics
+==================================================
+
+duration_seconds: 600.000000
+n_cameras: 2000
+nic_bandwidth_gbps: 7.000000
+mean_ingress_gbps: 5.829687
+max_ingress_gbps: 8.014573
+mean_egress_gbps: 7.014870
+max_concurrent_bursts: 17
+mean_concurrent_bursts: 7.648033
+max_total_buffer_gb: 0.353337
+mean_total_buffer_gb: 0.234563
+max_emergency_pool_gb: 0.301524
+mean_emergency_pool_gb: 0.209734
+mean_continuity_ratio: 1.000000
+min_continuity_ratio: 1.000000
+mean_adaptation_level: 0.002327
+max_adaptation_level: 0.006000
+total_dropped_bits: 0.000000
+total_dropped_gb: 0.000000
+drop_ratio: 0.000000
+streams_with_drops: 0
+max_frames_dropped_per_stream: 0
+mean_frames_dropped_per_stream: 0.000000
